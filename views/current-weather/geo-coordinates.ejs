@@ -1,0 +1,189 @@
+<%- include('../includes/head.ejs') %>
+</head>
+
+<body>
+    <%- include('../includes/navigation.ejs') %>
+    <main>
+        <div class="container h-100">
+            <div class="card border-0 justify-content-center text-center ">
+
+                <div class="card-header bg-white text-center">
+                    <h4><b>Current Weather Data from Open Weather API</b></h4>
+                </div>
+                <div class="card-body text-info">
+                    <form method="POST" class="form-inline justify-content-center"
+                        action='/current-weather/geo-coordinates'>
+                        <input class="form-control mr-sm-2" type="text" id="lon" name="lon"
+                            placeholder="Longitude coordinates" aria-label="Search">
+                        <input class="form-control mr-sm-2" type="text" pattern='^-?[0-9]\d*(\.\d+)?$' id="lat" name="lat"
+                            placeholder="Latitude coordinates" aria-label="Search">
+                        <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                </div>
+
+
+                <% if (code === true) { %>
+
+                <div class="alert alert-danger text-center" role="alert">
+                    <%= msg %>
+                </div>
+
+
+                <% } else if (code === false) { %>
+
+                <h5 class="card-title">Current Weather Details of <%= data.name %></h5>
+                <table class="table text-capitalize">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Coordinate Longitude</td>
+                            <td><%= data.coord.lon %></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>Coordinate Latitude</td>
+                            <td><%= data.coord.lat %></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>Weather Id</td>
+                            <td><%= data.weather[0].id %></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">4</th>
+                            <td>Weather Main</td>
+                            <td><%= data.weather[0].main %></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">5</th>
+                            <td>Weather Description</td>
+                            <td><%= data.weather[0].description %></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">6</th>
+                            <td>Weather Icon</td>
+                            <td><%= data.weather[0].icon %></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">7</th>
+                            <td>Base</td>
+                            <td><%= data.base %></td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">8</th>
+                            <td>Main Temperature</td>
+                            <td><%= data.main.temp %></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">9</th>
+                            <td>Main Feel Like</td>
+                            <td><%= data.main.feels_like %></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">10</th>
+                            <td>Main Minimum Temperature</td>
+                            <td><%= data.main.temp_min %></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">11</th>
+                            <td>Main Minimum Temperature</td>
+                            <td><%= data.main.temp_max %></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">12</th>
+                            <td>Main Pressure</td>
+                            <td><%= data.main.pressure %></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">13</th>
+                            <td>Main Humidity</td>
+                            <td><%= data.main.humidity %></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">14</th>
+                            <td>Visibility</td>
+                            <td><%= data.visibility %></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">15</th>
+                            <td>Wind Speed</td>
+                            <td><%= data.wind.speed %></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">16</th>
+                            <td>Wind Degree</td>
+                            <td><%= data.wind.deg %></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">17</th>
+                            <td>Clouds All</td>
+                            <td><%= data.clouds.all %></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">18</th>
+                            <td>Dt</td>
+                            <td><%= data.dt %></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">19</th>
+                            <td>Sys Type</td>
+                            <td><%= data.sys.type %></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">20</th>
+                            <td>Sys Id</td>
+                            <td><%= data.sys.id %></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">21</th>
+                            <td>Sys Country</td>
+                            <td><%= data.sys.country %></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">22</th>
+                            <td>Sys Sunrise</td>
+                            <td><%= data.sys.sunrise %></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">23</th>
+                            <td>Sys Sunset</td>
+                            <td><%= data.sys.sunset %></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">24</th>
+                            <td>Timezone</td>
+                            <td><%= data.timezone %></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">25</th>
+                            <td>Id</td>
+                            <td><%= data.id %></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">26</th>
+                            <td>Name</td>
+                            <td><%= data.name %></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">27</th>
+                            <td>Cod</td>
+                            <td><%= data.cod %></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        </div>
+        <% } %>
+    </main>
+
+
+    <%- include('../includes/end.ejs') %>
