@@ -9,33 +9,35 @@
 
                 <div class="card-header bg-white text-center text-uppercase text-info">
                     <h4><b>Current Weather Data Response from Open Weather API</b></h4>
-                    <h4>By City Name</h4>
+                    <h4>BY Zip Code & Country Code</h4>
                 </div>
                 <div class="card-body text-info">
-                    <form method="POST" class="form-inline justify-content-center" action='/current-weather/city-name'>
-                        <input class="form-control mr-sm-2" type="text" id="cityName" name="cityName"
-                            placeholder="Search by City Name" aria-label="Search">
+                    <form method="POST" class="form-inline justify-content-center"
+                        action='/current-weather/zip-country-code'>
+                        <input class="form-control mr-sm-2" type="text" id="zip" name="zip"
+                            placeholder="Zip Code" aria-label="Zip">
+                        <input class="form-control mr-sm-2" type="textn" id="country"
+                            name="country" placeholder="Country Code" aria-label="Search">
                         <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
                     </form>
                 </div>
 
 
                 <% if (cod == "02") { %>
-
-                <div class="alert alert-warning text-center" role="alert">
-                    <%= msg %>
-                </div>
-
+                
+                    <div class="alert alert-warning text-center" role="alert">
+                        <%= msg %>
+                    </div>
+                
                 <% } else if (cod == "03" ) { %>
-
-                <div class="alert alert-danger text-center" role="alert">
-                    <%= msg %>
-                </div>
-
+                    
+                    <div class="alert alert-danger text-center" role="alert">
+                        <%= msg %>
+                    </div>
+                
                 <% } else if (cod == "200" ) { %>
 
-
-                <h5 class="card-title">Current Weather Details of <%= data.name %></h5>
+                <h5 class="card-title">Current Weather Details of <%= data.name %>, <%= data.sys.country %></h5>
                 <table class="table text-capitalize">
                     <thead>
                         <tr>
@@ -113,39 +115,41 @@
                         </tr>
                         <tr>
                             <th scope="row">14</th>
+                            <td>Main Sea Level</td>
+                            <td><%= data.main.sea_level %></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">15</th>
+                            <td>Main Ground Level</td>
+                            <td><%= data.main.grnd_level %></td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">16</th>
                             <td>Visibility</td>
                             <td><%= data.visibility %></td>
                         </tr>
                         <tr>
-                            <th scope="row">15</th>
+                            <th scope="row">17</th>
                             <td>Wind Speed</td>
                             <td><%= data.wind.speed %></td>
                         </tr>
                         <tr>
-                            <th scope="row">16</th>
+                            <th scope="row">18</th>
                             <td>Wind Degree</td>
                             <td><%= data.wind.deg %></td>
                         </tr>
                         <tr>
-                            <th scope="row">17</th>
+                            <th scope="row">19</th>
                             <td>Clouds All</td>
                             <td><%= data.clouds.all %></td>
                         </tr>
                         <tr>
-                            <th scope="row">18</th>
+                            <th scope="row">20</th>
                             <td>Dt</td>
                             <td><%= data.dt %></td>
                         </tr>
-                        <tr>
-                            <th scope="row">19</th>
-                            <td>Sys Type</td>
-                            <td><%= data.sys.type %></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">20</th>
-                            <td>Sys Id</td>
-                            <td><%= data.sys.id %></td>
-                        </tr>
+
                         <tr>
                             <th scope="row">21</th>
                             <td>Sys Country</td>
@@ -185,12 +189,13 @@
                 </table>
             </div>
         </div>
+
         <% } else { %>
-
-            <div class="alert alert-danger text-center" role="alert">
-                <%= cod %> Error: <%= msg %>
-            </div>
-
+        
+        <div class="alert alert-danger text-center" role="alert">
+            <%= cod %> Error: <%= msg %>
+        </div>
+        
         <% } %>
     </main>
 

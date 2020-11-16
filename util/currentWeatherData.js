@@ -78,4 +78,23 @@ exports.getDataByGeoCoordinates = (lat, lon, callback) => {
     })
 }
 
+
+exports.getDataByZipCountryCode = (zip, country, callback) => {
+    return new Promise((resolve, reject) => {
+        // api.openweathermap.org/data/2.5/weather?zip={zip code},{country code}&appid={API key}
+        const url = constants.BASE_URL + 'zip=' + encodeURIComponent(zip) + ',' + encodeURIComponent(country) + '&appid=' + constants.SECRET_KEY;
+        console.log(url);
+
+
+        request({ url, json: true }, (error, response, body) => {
+            console.log("body", body);
+            if (error) {
+                callback("Oops!! Open Weather API is not responding! ", undefined)
+            } else {
+                resolve(body)
+            }
+        })
+    })
+}
+
  

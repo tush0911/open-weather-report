@@ -13,26 +13,35 @@ router.post('/city-name', (req, res, next) => {
     if (!cityName) {
         res.render('current-weather/city-name', {
             msg: "Oops! It looks like you have't enter the city name.",
-            code: true,
+            cod: '03',
             pageTitle: 'Weather Report'
         })
     }
 
     currentWeatherData.getDataByName(cityName).then((response) => {
         // console.log('res: ', response);
-        res.render('current-weather/city-name', {
-            code: false,
-            data: response,
-            pageTitle: 'Weather Report'
-        })
+        if (response.cod == "200") {
+            res.render('current-weather/city-name', {
+                cod: response.cod,
+                data: response,
+                pageTitle: 'Weather Report'
+            })
+        } else {
+            res.render('current-weather/city-name', {
+                cod: response.cod,
+                msg: response.message,
+                pageTitle: 'Error: Weather Report'
+            })
+        }
+
     })
 })
 
 router.get('/city-name', (req, res, next) => {
-        res.render('current-weather/city-name', {
-            msg: "Oops! It looks like you have't enter the city name.",
-            code: true,
-            pageTitle: 'Weather Report'
+    res.render('current-weather/city-name', {
+        cod: '02',
+        msg: "Enter the city name.",
+        pageTitle: 'Weather Report'
     })
 })
 
@@ -45,26 +54,36 @@ router.post('/city-id', (req, res, next) => {
 
     if (!cityId) {
         res.render('current-weather/city-id', {
+            cod: '03',
             msg: "Oops! It looks like you have't enter the city id.",
-            code: true,
             pageTitle: 'Weather Report'
         })
     }
 
     currentWeatherData.getDataById(cityId).then((response) => {
         // console.log('res: ', response);
-        res.render('current-weather/city-id', {
-            code: false,
-            data: response,
-            pageTitle: 'Weather Report'
-        })
+        if (response.cod == "200") {
+            res.render('current-weather/city-id', {
+                cod: response.cod,
+                data: response,
+                pageTitle: 'Weather Report'
+            })
+        } else {
+            res.render('current-weather/city-id', {
+                cod: response.cod,
+                msg: response.message,
+                pageTitle: 'Error: Weather Report'
+            })
+        }
+
+
     })
 })
 
 router.get('/city-id', (req, res, next) => {
     res.render('current-weather/city-id', {
-        msg: "Oops! It looks like you have't enter the city id.",
-        code: true,
+        msg: "Enter the city id.",
+        cod: '02',
         pageTitle: 'Weather Report'
     })
 })
@@ -77,26 +96,76 @@ router.post('/geo-coordinates', (req, res, next) => {
 
     if (!lat || !lon) {
         res.render('current-weather/geo-coordinates', {
+            cod: '03',
             msg: "Oops! It looks like you have't enter the Geo Coordinates.",
-            code: true,
             pageTitle: 'Weather Report'
         })
     }
 
     currentWeatherData.getDataByGeoCoordinates(lat, lon).then((response) => {
         // console.log('res: ', response);
-        res.render('current-weather/geo-Coordinates', {
-            code: false,
-            data: response,
-            pageTitle: 'Weather Report'
-        })
+        if (response.cod == "200") {
+            res.render('current-weather/geo-Coordinates', {
+                cod: response.cod,
+                data: response,
+                pageTitle: 'Weather Report'
+            })
+        } else {
+            res.render('current-weather/geo-Coordinates', {
+                cod: response.cod,
+                msg: response.messsge,
+                pageTitle: 'Error: Weather Report'
+            })
+        }
+
     })
 })
 
 router.get('/geo-coordinates', (req, res, next) => {
     res.render('current-weather/geo-coordinates', {
-        msg: "Oops! It looks like you have't enter the geo coordinates.",
-        code: true,
+        msg: "Enter the geo coordinates.",
+        cod: '02',
+        pageTitle: 'Weather Report'
+    })
+})
+
+// Search by Zip Code and Country Code
+
+router.post('/zip-country-code', (req, res, next) => {
+    var zip = req.body.zip;
+    var country = req.body.country;
+
+    if (!zip || !country) {
+        res.render('current-weather/zip-country-code', {
+            msg: "Oops! It looks like you have't enter the Zip Code or Country Code.",
+            cod: '03',
+            pageTitle: 'Weather Report'
+        })
+    }
+
+    currentWeatherData.getDataByZipCountryCode(zip, country).then((response) => {
+        // console.log('res: ', response);
+        if (response.cod == "200") {
+            res.render('current-weather/zip-country-code', {
+                cod: response.cod,
+                data: response,
+                pageTitle: 'Weather Report - By Zip Code and Country Code'
+            })
+        } else {
+            res.render('current-weather/zip-country-code', {
+                msg: response.message,
+                cod: response.cod,
+                pageTitle: 'Error: Weather Report - By Zip Code and Country Code'
+            })
+        }
+
+    })
+})
+
+router.get('/zip-country-code', (req, res, next) => {
+    res.render('current-weather/zip-country-code', {
+        msg: "Enter the zip code & country code.",
+        cod: '02',
         pageTitle: 'Weather Report'
     })
 })

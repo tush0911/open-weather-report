@@ -4,5 +4,21 @@
 <body>
     <%- include('includes/navigation.ejs') %>
 
-    <h2>This is index page</h2>
+    <div class="container h-100">
+        <div class="card border-0 h-100 justify-content-center text-center align-items-center">
+            <h1>Welcome to Open Weather API Data Response Analyser.</h1>
+            <hr>
+            <div class="text-uppercase">
+                <a href="/current-weather/city-name">By City Name</a>
+                <hr>
+                <a href="/current-weather/city-id">By City Id</a>
+                <hr>
+                <a href="/current-weather/geo-coordinates">By Geo
+                    Cordinates</a>
+                <hr>
+                <a href="/current-weather/zip-country-code">By Zip and Country Code</a>
+            </div>
+        </div>
+    </div>
+
     <%- include('includes/end.ejs') %>
